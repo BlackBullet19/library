@@ -2,19 +2,34 @@ package org.telran.library.service;
 
 import org.telran.library.model.User;
 import org.telran.library.repository.UserRepository;
-import org.telran.library.repository.UserRepositoryImpl;
+
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository = new UserRepositoryImpl();
+    private UserRepository userRepository;
 
-    @Override
-    public User getUser(int id) {
-        return userRepository.getUser(id);
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void init() {
-        userRepository.init();
+    public List<User> getUserList() {
+        return userRepository.getUserList();
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.saveUser(user);
+    }
+
+    @Override
+    public User getUser(int userId) {
+        return userRepository.getUser(userId);
+    }
+
+    @Override
+    public void removeUser(int userId) {
+        userRepository.removeUser(userId);
     }
 }

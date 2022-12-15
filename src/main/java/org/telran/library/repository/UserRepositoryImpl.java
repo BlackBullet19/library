@@ -7,18 +7,25 @@ import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
 
-   private List<User> userList;
+    private List<User> userList = new ArrayList<>();
 
     @Override
-    public User getUser(int id) {
-        return userList.stream().filter(user -> user.getUserId() == id).findFirst().get();
+    public List<User> getUserList() {
+        return userList;
     }
 
     @Override
-    public void init() {
-        userList = new ArrayList<>();
-        userList.add(new User(1,"UserOne"));
-        userList.add(new User(2,"UserTwo"));
-        userList.add(new User(3,"UserThree"));
+    public void saveUser(User user) {
+        userList.add(user);
+    }
+
+    @Override
+    public User getUser(int id) {
+        return userList.stream().filter(userId -> userId.getUserId() == id).findFirst().get();
+    }
+
+    @Override
+    public void removeUser(int id) {
+        userList.remove(getUser(id));
     }
 }
