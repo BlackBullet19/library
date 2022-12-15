@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface HomeRepository {
 
-    void init();
-
     List<Book> getHomeRepository();
 
     void addBook(Book book);

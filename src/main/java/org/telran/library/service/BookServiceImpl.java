@@ -2,13 +2,16 @@ package org.telran.library.service;
 
 import org.telran.library.model.Book;
 import org.telran.library.repository.BookRepository;
-import org.telran.library.repository.BookRepositoryImpl;
 
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
 
-    BookRepository bookRepository = new BookRepositoryImpl();
+    private BookRepository bookRepository;
+
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public List<Book> getBookRepositoryList() {
@@ -23,11 +26,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public void removeBookFromRepository(int id) {
         bookRepository.removeBook(id);
-    }
-
-    @Override
-    public void init() {
-        bookRepository.init();
     }
 
     @Override

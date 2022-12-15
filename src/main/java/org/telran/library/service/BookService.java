@@ -12,7 +12,5 @@ public interface BookService {
 
     void removeBookFromRepository(int id);
 
-    void init();
-
     Book getBook(int id);
 }

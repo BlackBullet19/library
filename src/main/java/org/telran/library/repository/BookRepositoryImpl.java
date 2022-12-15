@@ -9,6 +9,10 @@ public class BookRepositoryImpl implements BookRepository {
 
     private List<Book> bookList;
 
+    public BookRepositoryImpl() {
+        init();
+    }
+
     @Override
     public void init() {
         bookList = new ArrayList<>();
@@ -36,7 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book getBook(int id) {
-        Book book = bookList.stream().filter(el -> el.getId() == id).findFirst().get();
+        Book book = bookList.stream().filter(bookId -> bookId.getId() == id).findFirst().get();
         return book;
     }
 }

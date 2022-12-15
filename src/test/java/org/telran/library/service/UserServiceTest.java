@@ -1,22 +1,49 @@
 package org.telran.library.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.telran.library.model.User;
+import org.telran.library.repository.HomeRepositoryImpl;
+import org.telran.library.repository.UserRepository;
+import org.telran.library.repository.UserRepositoryImpl;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserServiceTest {
 
-    UserService userService = new UserServiceImpl();
+    private UserRepository userRepository = new UserRepositoryImpl();
+    private UserService userService = new UserServiceImpl(userRepository);
+    private User user = new User(1, "Test", new HomeRepositoryImpl());
 
     @BeforeEach
     void init() {
-        userService.init();
+        userService.saveUser(user);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    void getUserList() {
+        List<User> userList = userService.getUserList();
+        assertEquals(user, userList.get(0));
+    }
+
+    @Test
+    void saveUser() {
+        List<User> userList = userService.getUserList();
+        assertEquals(user, userList.get(0));
+    }
+
+    @Test
     void getUser() {
-        User user = userService.getUser(1);
-        assertEquals("UserOne", user.getUsername());
+        assertEquals(user, userService.getUser(user.getUserId()));
+    }
+
+    @Test
+    void removeUser() {
+        userService.removeUser(user.getUserId());
+        assertThrows(NoSuchElementException.class, () -> userService.getUser(user.getUserId()));
     }
 }

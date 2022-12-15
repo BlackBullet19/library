@@ -2,17 +2,35 @@ package org.telran.library;
 
 import org.telran.library.controller.LibraryController;
 import org.telran.library.controller.LibraryControllerImpl;
-
+import org.telran.library.model.User;
+import org.telran.library.repository.*;
+import org.telran.library.service.*;
 import java.util.Scanner;
 
 public class AppLibrary {
 
     public static void main(String[] args) {
 
-        LibraryController controller = new LibraryControllerImpl();
+        UserRepository userRepository = new UserRepositoryImpl();
+        UserService userService = new UserServiceImpl(userRepository);
+
+        User userOne = new User(1, "UserOne", new HomeRepositoryImpl());
+        User userTwo = new User(2, "UserTwo", new HomeRepositoryImpl());
+
+        userService.saveUser(userOne);
+        userService.saveUser(userTwo);
+
+        BookRepository bookRepository = new BookRepositoryImpl();
+        BookService bookService = new BookServiceImpl(bookRepository);
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your ID");
-        controller.init(scanner.nextInt());
+        int userId = scanner.nextInt();
+        User currentUser = userService.getUser(userId);
+
+        OrderService orderService = new OrderServiceImpl(currentUser.getUserRepository());
+
+        LibraryController controller = new LibraryControllerImpl(bookService, orderService);
 
         boolean exitKeyWord = false;
 

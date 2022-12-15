@@ -1,9 +1,9 @@
 package org.telran.library.service;
 
 
-import org.junit.jupiter.api.BeforeEach;
 import org.telran.library.model.Book;
-
+import org.telran.library.repository.BookRepository;
+import org.telran.library.repository.BookRepositoryImpl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,13 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BookServiceTest {
 
-   private BookService bookService = new BookServiceImpl();
-
-    @BeforeEach
-    void init(){
-        bookService.init();
-    }
-
+    private BookRepository bookRepository = new BookRepositoryImpl();
+    private BookService bookService = new BookServiceImpl(bookRepository);
 
     @org.junit.jupiter.api.Test
     void getBookRepositoryList() {
@@ -31,7 +26,6 @@ class BookServiceTest {
 
     @org.junit.jupiter.api.Test
     void addBookToRepository() {
-
         bookService.addBookToRepository(new Book("TestOne", "TestTwo", 1234, 1010));
         Book book = bookService.getBook(1010);
         assertEquals(1234, book.getPageCount());
@@ -51,3 +45,5 @@ class BookServiceTest {
         assertEquals(500, book.getPageCount());
     }
 }
+
+

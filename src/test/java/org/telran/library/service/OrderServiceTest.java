@@ -1,7 +1,8 @@
 package org.telran.library.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.telran.library.model.Book;
+import org.telran.library.repository.HomeRepository;
+import org.telran.library.repository.HomeRepositoryImpl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -11,12 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OrderServiceTest {
 
-    private OrderService orderService = new OrderServiceImpl();
-
-    @BeforeEach
-    void init() {
-        orderService.init();
-    }
+    private HomeRepository homeRepository = new HomeRepositoryImpl();
+    private OrderService orderService = new OrderServiceImpl(homeRepository);
 
     @org.junit.jupiter.api.Test
     void getHomeRepositoryList() {

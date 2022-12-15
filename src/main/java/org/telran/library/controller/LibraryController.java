@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface LibraryController {
 
-    void init(int id);
-
     List<Book> getBookRepository();
 
     List<Book> getUserBookList();

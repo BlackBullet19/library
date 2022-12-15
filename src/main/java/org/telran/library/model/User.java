@@ -1,9 +1,6 @@
 package org.telran.library.model;
 
-import org.telran.library.service.OrderService;
-import org.telran.library.service.OrderServiceImpl;
-
-import java.util.List;
+import org.telran.library.repository.HomeRepository;
 
 public class User {
 
@@ -11,25 +8,24 @@ public class User {
 
     private String username;
 
-    private List<Book> userHomeRepository;
+    private HomeRepository homeRepository;
 
-    private OrderService orderService = new OrderServiceImpl();
 
-    public User(int userId, String username) {
+    public User(int userId, String username, HomeRepository homeRepository) {
         this.userId = userId;
         this.username = username;
-        this.userHomeRepository = orderService.getHomeRepositoryList();
+        this.homeRepository= homeRepository;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public OrderService getOrderService() {
-        return orderService;
-    }
-
     public String getUsername() {
         return username;
+    }
+
+    public HomeRepository getUserRepository() {
+        return homeRepository;
     }
 }

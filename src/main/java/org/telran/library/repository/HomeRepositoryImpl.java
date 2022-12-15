@@ -9,8 +9,7 @@ public class HomeRepositoryImpl implements HomeRepository {
 
     private List<Book> homeBookList;
 
-    @Override
-    public void init() {
+    public HomeRepositoryImpl() {
         homeBookList = new ArrayList<>();
     }
 
@@ -31,7 +30,7 @@ public class HomeRepositoryImpl implements HomeRepository {
 
     @Override
     public Book getBook(int id) {
-        Book book = homeBookList.stream().filter(el -> el.getId() == id).findFirst().get();
+        Book book = homeBookList.stream().filter(bookId -> bookId.getId() == id).findFirst().get();
         return book;
     }
 }

@@ -12,7 +12,5 @@ public interface OrderService {
 
     void removeBookFromUserRepository(int id);
 
-    void init();
-
     Book getBook(int id);
 }
