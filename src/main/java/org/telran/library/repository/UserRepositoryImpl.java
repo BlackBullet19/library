@@ -9,6 +9,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     private List<User> userList = new ArrayList<>();
 
+    public UserRepositoryImpl() {
+        userList.add(new User(1, "UserOne"));
+        userList.add(new User(2, "UserTwo"));
+    }
+
     @Override
     public List<User> getUserList() {
         return userList;

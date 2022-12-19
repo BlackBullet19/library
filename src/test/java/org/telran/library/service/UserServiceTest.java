@@ -3,7 +3,6 @@ package org.telran.library.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.telran.library.model.User;
-import org.telran.library.repository.HomeRepositoryImpl;
 import org.telran.library.repository.UserRepository;
 import org.telran.library.repository.UserRepositoryImpl;
 
@@ -17,7 +16,7 @@ class UserServiceTest {
 
     private UserRepository userRepository = new UserRepositoryImpl();
     private UserService userService = new UserServiceImpl(userRepository);
-    private User user = new User(1, "Test", new HomeRepositoryImpl());
+    private User user = new User(1, "TestUser");
 
     @BeforeEach
     void init() {

@@ -1,6 +1,5 @@
 package org.telran.library.model;
 
-import org.telran.library.repository.HomeRepository;
 
 public class User {
 
@@ -8,13 +7,9 @@ public class User {
 
     private String username;
 
-    private HomeRepository homeRepository;
-
-
-    public User(int userId, String username, HomeRepository homeRepository) {
+    public User(int userId, String username) {
         this.userId = userId;
         this.username = username;
-        this.homeRepository= homeRepository;
     }
 
     public int getUserId() {
@@ -23,9 +18,5 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public HomeRepository getUserRepository() {
-        return homeRepository;
     }
 }

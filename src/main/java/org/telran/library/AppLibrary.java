@@ -14,23 +14,20 @@ public class AppLibrary {
         UserRepository userRepository = new UserRepositoryImpl();
         UserService userService = new UserServiceImpl(userRepository);
 
-        User userOne = new User(1, "UserOne", new HomeRepositoryImpl());
-        User userTwo = new User(2, "UserTwo", new HomeRepositoryImpl());
-
-        userService.saveUser(userOne);
-        userService.saveUser(userTwo);
-
         BookRepository bookRepository = new BookRepositoryImpl();
         BookService bookService = new BookServiceImpl(bookRepository);
+
+        HomeRepository homeRepository = new HomeRepositoryImpl();
+        OrderService orderService = new OrderServiceImpl(homeRepository);
+
+        orderService.addUsers(userService.getUserList());
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your ID");
         int userId = scanner.nextInt();
         User currentUser = userService.getUser(userId);
 
-        OrderService orderService = new OrderServiceImpl(currentUser.getUserRepository());
-
-        LibraryController controller = new LibraryControllerImpl(bookService, orderService);
+        LibraryController controller = new LibraryControllerImpl(bookService, orderService, currentUser);
 
         boolean exitKeyWord = false;
 
@@ -43,15 +40,15 @@ public class AppLibrary {
             System.out.println("Write 'exit' if you want to exit");
             System.out.println("Books in library : " + controller.getBookRepository());
             System.out.println("Your books : " + controller.getUserBookList());
-            if (action.equals("take")) {
+            if ("take".equals(action)) {
                 System.out.println("Write bookId");
                 controller.moveBookFromLibraryToUser(scanner.nextInt());
             }
-            if (action.equals("return")) {
+            if ("return".equals(action)) {
                 System.out.println("Write bookId");
                 controller.moveBookFromUserToLibrary(scanner.nextInt());
             }
-            if (action.equals("exit")) {
+            if ("exit".equals(action)) {
                 scanner.close();
                 exitKeyWord = true;
             }
